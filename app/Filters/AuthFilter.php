@@ -12,7 +12,7 @@ class AuthFilter implements FilterInterface
     {
         // Verificar se o usuário está autenticado
         $session = \Config\Services::session();
-        if ($session->has('usuario_login')) {
+        if (!$session->has('usuario_login')) {
             // Usuário não autenticado, redirecionar para a página de login
             return redirect()->to(base_url('Usuario/login'));
         }

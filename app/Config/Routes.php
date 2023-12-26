@@ -8,7 +8,7 @@ use App\Filters\AuthFilter;
  */
 $routes->get('/', 'Home::index');
 
-$routes->group('', ['filter' => 'auth'], function ($routes) {
+$routes->group('', ['filter' => AuthFilter::class], function ($routes) {
 
     $routes->add('Clientes', 'ClienteController::inserir');
     $routes->get('Clientes/listagem', 'ClienteController::index');

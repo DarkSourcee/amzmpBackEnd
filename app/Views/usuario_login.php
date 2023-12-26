@@ -6,15 +6,16 @@
     <title><?php echo $titulo ?></title>
     <!-- Adicione a referência ao Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Adicione a referência ao SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Adicione estilos personalizados -->
     <style>
         body {
             background-color: #f8f9fa;
         }
 
         .container {
-            max-width: 400px; 
+            max-width: 400px;
             margin-top: 50px;
         }
 
@@ -50,10 +51,14 @@
 </head>
 <body>
     <div class="container">
-        <div id="error-container"></div>
+        <?php if (!empty($msg)) : ?>
+            <div class="alert <?php echo $msg_class; ?>" role="alert">
+                <?php echo $msg; ?>
+            </div>
+        <?php endif; ?>
 
         <h1><?php echo $tit_formulario ?></h1>
-        <form method="post" id="loginForm">
+        <form method="post">
 
             <!-- Campo Login -->
             <div class="form-group">
@@ -67,7 +72,7 @@
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="Sua senha ****">
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="submitForm()"><?php echo $acao ?></button>            
+            <button type="submit" id="acao" class="btn btn-primary"><?php echo $acao ?></button>            
         </form>
         <a href="<?php echo base_url('Usuario/inserir'); ?>">
             <button class="btn btn-success w-100">Registrar-se</button>
@@ -78,46 +83,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Adicione a referência ao SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-    <script>
-        function submitForm() {
-            $.ajax({
-                url: 'seu_script_php.php',
-                method: 'POST',
-                data: $('#loginForm').serialize(),
-                success: function(response) {
-                    // Verifica se a resposta contém erro
-                    if (response.error) {
-                        // Exibe o erro usando SweetAlert2
-                        Swal.fire({
-                            title: 'Erro!',
-                            text: response.error,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    } else {
-                        // Exemplo de uso do SweetAlert2 para sucesso
-                        Swal.fire({
-                            title: 'Bem-vindo!',
-                            text: 'Login bem-sucedido!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                },
-                error: function(error) {
-                    // Exibe erro genérico em caso de falha na requisição AJAX
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Erro ao processar a solicitação.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            });
-        }
-    </script>
 </body>
 </html>

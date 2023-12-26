@@ -11,7 +11,11 @@
 </head>
 <body>
     <div class="container mt-5">
-        <?php echo $msg; ?>
+        <?php if (!empty($msg)) : ?>
+            <div class="alert <?php echo $msg_class; ?>" role="alert">
+                <?php echo $msg; ?>
+            </div>
+        <?php endif; ?>
 
         <h1><?php echo $tit_formulario ?></h1>
         <form method='post'>

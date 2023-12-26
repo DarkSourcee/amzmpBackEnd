@@ -31,7 +31,6 @@ class UsuarioController extends BaseController
                 $usuario_login = $login; 
                 $this->session->set('usuario_login', $usuario_login); 
                 $data['msg'] = $session_user = $this->session->get('usuario_login'); 
-                echo $data['msg'];
                 return redirect()->to(base_url('Clientes/listagem'));
             } else {
                 // Falha no login
